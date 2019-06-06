@@ -18,10 +18,7 @@ pipelines:
         setup:
           environmentVariables:
             normal:
-              ENV1: value1
-        requires:
-          integrations:
-            - slack_bindu      
+              ENV1: value1      
         triggeredBy:
           resources:
             - sample1
