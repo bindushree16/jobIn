@@ -1,0 +1,48 @@
+ 
+resources:
+  - name: sample1
+    type: gitRepo
+    repoPath: bindushree16/jobIn
+    configuration:
+      integrationName: bindu_github
+      branches:
+        only: master
+    version:
+      sha: master
+
+pipelines:
+  - name: pipelineInJob
+    steps:
+      - name: test1
+        type: bash
+        setup:
+          environmentVariables:
+            normal:
+              ENV1: value1
+        requires:
+          integrations:
+            - slack_bindu      
+        triggeredBy:
+          resources:
+            - sample1
+        execution:
+          onStart:
+            - printenv
+          onExecute: 
+             - printenv
+             
+      - name: test2
+          type: bash
+          setup:
+            environmentVariables:
+              normal:
+                ENV1: value1
+          requires:
+            integrations:
+              - slack_bindu      
+          triggeredBy:
+            resources:
+              - sample1
+          execution:
+            onExecute: 
+               - printenv         
